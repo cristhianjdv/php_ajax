@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo</title>
+    <script src="./js/jQuery.js"></script>
+    <script src="./js/mi_ajax.js"></script>
+</head>
+<body>
+
+    <main>
+        <button type="button" class="btn_hora">Que hora es</button>
+        <button type="button" class="btn_texto">Texto</button>
+    </main>
+    <main id="mi_texto">
+
+    </main>
+    <main id="hora">
+
+    </main>
+
+    <script>
+        $('.btn_hora').on('click',function(){
+
+            /*de donde recuperare la informacion*/
+            var url = './source/mi_proceso.php';
+            var metodo = 'POST';
+
+            /*Aqui podemos agregar valores de dinamicos o esticos
+            en este ejemplo sera 2 estaticos
+            */
+            var datos = new FormData();
+            datos.append('txt_nombre', 'soy yo'); 
+            datos.append('txt_apellido', 'adivina');
+            /*------------------------*/
+            datos.append('op', '1'); /*indico 1 para hora y 2 para texto*/
+
+            /*envio mi valores a la funcion AJAX y espero que resuelva la consulta*/
+            fun_ajax(url, metodo, datos, function(error, respuesta) {
+                console.log(respuesta); /*aqui muestra la respuesta*/
+                $('#hora').html(respuesta.resultado);
+            });
+                    
+        });
+
+        $('.btn_texto').on('click',function(){
+
+            /*de donde recuperare la informacion*/
+            var url = './source/mi_proceso.php';
+            var metodo = 'POST';
+
+            /*Aqui podemos agregar valores de dinamicos o esticos
+            en este ejemplo sera 2 estaticos
+            */
+            var datos = new FormData();
+            datos.append('txt_nombre', 'soy yo'); 
+            datos.append('txt_apellido', 'adivina');
+            /*------------------------*/
+            datos.append('op', '2'); /*indico 1 para hora y 2 para texto*/
+
+            /*envio mi valores a la funcion AJAX y espero que resuelva la consulta*/
+            fun_ajax(url, metodo, datos, function(error, respuesta) {
+                console.log(respuesta); /*aqui muestra la respuesta*/
+                $('#mi_texto').html(respuesta.resultado);
+            });
+
+        });
+    </script>
+
+
+</body>
+</html>
